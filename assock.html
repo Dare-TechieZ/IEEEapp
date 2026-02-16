@@ -1,0 +1,2868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE Associate Member Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=OpenDyslexic:wght@400;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #8B5CF6;
+            --primary-blue: #3B82F6;
+            --dark-bg: #0F172A;
+            --card-bg: #1E293B;
+            --accent-cyan: #06B6D4;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+            color: #E2E8F0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Dyslexia Mode - Comprehensive Styles */
+        body.dyslexia-mode {
+            font-family: 'Comic Neue', cursive;
+            letter-spacing: 0.05em;
+            word-spacing: 0.1em;
+            line-height: 1.8;
+            background: #F5F5DC !important;
+            color: #2C3E50 !important;
+        }
+        
+        /* Dyslexia Mode - Background */
+        body.dyslexia-mode .bg-slate-900,
+        body.dyslexia-mode .bg-slate-800,
+        body.dyslexia-mode main {
+            background: #F5F5DC !important;
+            color: #2C3E50 !important;
+        }
+        
+        body.dyslexia-mode .bg-gradient-to-br,
+        body.dyslexia-mode .bg-gradient-to-r {
+            background: #F5F5DC !important;
+        }
+        
+        /* Dyslexia Mode - Cards and Containers */
+        body.dyslexia-mode .glass-card,
+        body.dyslexia-mode .bg-slate-800\/50,
+        body.dyslexia-mode .bg-slate-800 {
+            background-color: #FFFFFF !important;
+            color: #2C3E50 !important;
+            border: 2px solid #34495E !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* Dyslexia Mode - Text Colors */
+        body.dyslexia-mode .text-gray-300,
+        body.dyslexia-mode .text-gray-400,
+        body.dyslexia-mode .text-gray-500 {
+            color: #2C3E50 !important;
+        }
+        
+        body.dyslexia-mode .text-white {
+            color: #2C3E50 !important;
+        }
+        
+        /* Dyslexia Mode - Sidebar */
+        body.dyslexia-mode aside {
+            background-color: #E8E4D9 !important;
+            border-right: 2px solid #34495E !important;
+        }
+        
+        body.dyslexia-mode .sidebar-link {
+            color: #2C3E50 !important;
+            border-left: 3px solid transparent;
+        }
+        
+        body.dyslexia-mode .sidebar-link:hover,
+        body.dyslexia-mode .sidebar-link.active {
+            background-color: #D5D0C0 !important;
+            color: #8B4513 !important;
+            border-left-color: #8B4513 !important;
+        }
+        
+        /* Dyslexia Mode - Header */
+        body.dyslexia-mode header {
+            background-color: #E8E4D9 !important;
+            border-bottom: 2px solid #34495E !important;
+        }
+        
+        /* Dyslexia Mode - Buttons */
+        body.dyslexia-mode button:not(.dyslexia-toggle) {
+            border: 2px solid #34495E !important;
+            font-weight: bold !important;
+        }
+        
+        body.dyslexia-mode .bg-purple-500,
+        body.dyslexia-mode .bg-blue-500,
+        body.dyslexia-mode .bg-green-500 {
+            background-color: #2C3E50 !important;
+            color: #F5F5DC !important;
+        }
+        
+        body.dyslexia-mode .text-purple-400,
+        body.dyslexia-mode .text-blue-400 {
+            color: #8B4513 !important;
+        }
+        
+        /* Dyslexia Mode - Inputs */
+        body.dyslexia-mode input,
+        body.dyslexia-mode select,
+        body.dyslexia-mode textarea {
+            background-color: #FFFFFF !important;
+            color: #2C3E50 !important;
+            border: 2px solid #34495E !important;
+            font-family: 'Comic Neue', cursive !important;
+        }
+        
+        /* Dyslexia Mode - Charts Canvas Background */
+        body.dyslexia-mode canvas {
+            background-color: #FFFFFF !important;
+            border-radius: 8px !important;
+        }
+        
+        /* Dyslexia Mode - Borders and Dividers */
+        body.dyslexia-mode .border-slate-700,
+        body.dyslexia-mode .border-slate-600,
+        body.dyslexia-mode .border-purple-500\/20 {
+            border-color: #34495E !important;
+        }
+        
+        /* Dyslexia Mode - Gradient Text */
+        body.dyslexia-mode .gradient-text {
+            background: none !important;
+            color: #8B4513 !important;
+            -webkit-text-fill-color: #8B4513 !important;
+            font-weight: bold !important;
+        }
+        
+        /* Dyslexia Mode - Notification Badge */
+        body.dyslexia-mode .notification-badge {
+            background-color: #C0392B !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Dyslexia Mode - Modal */
+        body.dyslexia-mode .modal > div {
+            background-color: #FFFFFF !important;
+            color: #2C3E50 !important;
+            border: 3px solid #34495E !important;
+        }
+        
+        /* Dyslexia Mode - Flowchart Nodes */
+        body.dyslexia-mode .flowchart-node {
+            background-color: #34495E !important;
+            color: #F5F5DC !important;
+            border: 3px solid #2C3E50 !important;
+        }
+        
+        /* Dyslexia Mode - Links */
+        body.dyslexia-mode a {
+            color: #8B4513 !important;
+            text-decoration: underline !important;
+        }
+        
+        /* Dyslexia Mode - Hover States */
+        body.dyslexia-mode .hover-glow:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+            transform: translateY(-2px);
+        }
+        
+        /* Dyslexia Toggle Button - Fixed Position in Header */
+        .dyslexia-toggle {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            border: 3px solid #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .dyslexia-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+        }
+        
+        body.dyslexia-mode .dyslexia-toggle {
+            background: #2C3E50 !important;
+            border-color: #34495E !important;
+            color: #F5F5DC !important;
+        }
+        
+        /* Original Styles */
+        .gradient-text {
+            background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-link {
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-link:hover, .sidebar-link.active {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.2) 0%, transparent 100%);
+            border-left-color: #8B5CF6;
+            color: #8B5CF6;
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform-origin: 50% 50%;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .notification-badge {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .flowchart-node {
+            background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .flowchart-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+        }
+        
+        .flowchart-arrow {
+            color: #8B5CF6;
+            font-size: 24px;
+            margin: 5px 0;
+        }
+        
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .dyslexia-toggle {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            .dyslexia-toggle span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-900 border-r border-purple-500/20 overflow-y-auto hidden md:block flex-shrink-0">
+            <div class="p-6 border-b border-purple-500/20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-atom text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg gradient-text">IEEE Dashboard</h1>
+                        <p class="text-xs text-gray-400">Associate Member</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="mt-6 px-4 space-y-2">
+                <a href="#" onclick="showTab('home')" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-home w-5"></i>
+                    <span>Home / Overview</span>
+                </a>
+                <a href="#" onclick="showTab('events')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-calendar-alt w-5"></i>
+                    <span>Events & Participation</span>
+                </a>
+                <a href="#" onclick="showTab('learning')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-graduation-cap w-5"></i>
+                    <span>Learning Hub</span>
+                </a>
+                <a href="#" onclick="showTab('achievements')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-trophy w-5"></i>
+                    <span>Achievements</span>
+                </a>
+                <a href="#" onclick="showTab('opportunities')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-briefcase w-5"></i>
+                    <span>Opportunities</span>
+                </a>
+                <a href="#" onclick="showTab('tasks')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-tasks w-5"></i>
+                    <span>Task Coordination</span>
+                </a>
+                <a href="#" onclick="showTab('community')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-comments w-5"></i>
+                    <span>Community</span>
+                </a>
+                <a href="#" onclick="showTab('mentorship')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-user-tie w-5"></i>
+                    <span>Mentorship</span>
+                </a>
+                <a href="#" onclick="showTab('resources')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-folder-open w-5"></i>
+                    <span>Resources</span>
+                </a>
+                <a href="#" onclick="showTab('profile')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-user w-5"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="#" onclick="showTab('feedback')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-comment-dots w-5"></i>
+                    <span>Feedback</span>
+                </a>
+                <a href="#" onclick="showTab('security')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white">
+                    <i class="fas fa-shield-alt w-5"></i>
+                    <span>Security</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900">
+            <!-- Top Header -->
+            <header class="bg-slate-800/50 backdrop-blur-md border-b border-purple-500/20 p-4 sticky top-0 z-50">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        <button class="md:hidden text-gray-300 hover:text-white" onclick="toggleMobileMenu()">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                        <h2 id="page-title" class="text-2xl font-bold gradient-text">Home Overview</h2>
+                    </div>
+                    
+                    <!-- Right Side Header Items -->
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <!-- Dyslexia Toggle - Moved to Header -->
+                        <button class="dyslexia-toggle" onclick="toggleDyslexiaMode()" title="Toggle Dyslexia-Friendly Mode">
+                            <i class="fas fa-brain"></i>
+                            <span id="dyslexia-text">Dyslexia Mode</span>
+                        </button>
+
+                        <button class="relative p-2 text-gray-300 hover:text-white transition" onclick="showNotifications()">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="notification-badge absolute top-0 right-0 bg-red-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                        </button>
+                        
+                        <div class="flex items-center gap-3 cursor-pointer" onclick="showTab('profile')">
+                            <img src="img1.jpg" alt="Profile" class="w-10 h-10 rounded-full border-2 border-purple-500">
+                            <div class="hidden sm:block">
+                                <p class="text-sm font-semibold">Anamika Sharma</p>
+                                <p class="text-xs text-gray-400">CS Branch • 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-6 space-y-6">
+                <!-- Home / Overview Panel -->
+                <div id="home" class="tab-content active">
+                    <!-- Welcome Banner -->
+                    <div class="glass-card rounded-2xl p-8 mb-6 hover-glow">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <h2 class="text-3xl font-bold mb-2">Welcome back, Anamika! 👋</h2>
+                                <p class="text-gray-300 mb-4">Year 2 • Computer Science Branch • Member since 2023</p>
+                                <div class="flex gap-3">
+                                    <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm border border-green-500/30">
+                                        <i class="fas fa-check-circle mr-1"></i> Active Member
+                                    </span>
+                                    <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm border border-purple-500/30">
+                                        <i class="fas fa-star mr-1"></i> Gold Tier
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-400 mb-1">Membership Valid Until</div>
+                                <div class="text-2xl font-bold text-purple-400">Dec 31, 2025</div>
+                                <div class="text-sm text-gray-400 mt-2">Days Remaining: <span class="text-white font-bold">287</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <div class="glass-card rounded-xl p-6 hover-glow">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Participation Score</p>
+                                    <h3 class="text-3xl font-bold text-purple-400">85/100</h3>
+                                </div>
+                                <div class="w-16 h-16 relative">
+                                    <svg class="progress-ring w-16 h-16">
+                                        <circle cx="32" cy="32" r="28" fill="none" stroke="#334155" stroke-width="4"/>
+                                        <circle cx="32" cy="32" r="28" fill="none" stroke="#8B5CF6" stroke-width="4" 
+                                                stroke-dasharray="175.9" stroke-dashoffset="26.4" class="progress-ring-circle"/>
+                                    </svg>
+                                    <span class="absolute inset-0 flex items-center justify-center text-xs font-bold">85%</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400">+12% from last month</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Events Attended</p>
+                                    <h3 class="text-3xl font-bold text-blue-400">24</h3>
+                                </div>
+                                <i class="fas fa-calendar-check text-3xl text-blue-400 opacity-50"></i>
+                            </div>
+                            <p class="text-xs text-gray-400">5 upcoming registered</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Volunteer Hours</p>
+                                    <h3 class="text-3xl font-bold text-cyan-400">48h</h3>
+                                </div>
+                                <i class="fas fa-hand-holding-heart text-3xl text-cyan-400 opacity-50"></i>
+                            </div>
+                            <p class="text-xs text-gray-400">Top 10% among members</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm">Pending Tasks</p>
+                                    <h3 class="text-3xl font-bold text-orange-400">3</h3>
+                                </div>
+                                <i class="fas fa-clock text-3xl text-orange-400 opacity-50"></i>
+                            </div>
+                            <p class="text-xs text-gray-400">2 due this week</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions & Announcements -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 glass-card rounded-xl p-6">
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                                <i class="fas fa-bullhorn text-purple-400"></i>
+                                Recent Announcements
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-purple-500 pl-4 py-2 bg-purple-500/10 rounded-r-lg">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <h4 class="font-semibold">Annual Tech Summit 2025 Registration Open</h4>
+                                        <span class="text-xs text-gray-400">2 hours ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-300 mb-2">Join us for the biggest technical event of the year. Early bird registration ends soon!</p>
+                                    <button onclick="showTab('events')" class="text-sm text-purple-400 hover:text-purple-300 font-medium">Register Now →</button>
+                                </div>
+                                <div class="border-l-4 border-blue-500 pl-4 py-2 bg-blue-500/10 rounded-r-lg">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <h4 class="font-semibold">New AI/ML Workshop Series Starting Next Week</h4>
+                                        <span class="text-xs text-gray-400">1 day ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-300 mb-2">5-week intensive program on Machine Learning fundamentals and applications.</p>
+                                    <button onclick="showTab('learning')" class="text-sm text-blue-400 hover:text-blue-300 font-medium">View Details →</button>
+                                </div>
+                                <div class="border-l-4 border-green-500 pl-4 py-2 bg-green-500/10 rounded-r-lg">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <h4 class="font-semibold">Volunteer Recognition Ceremony</h4>
+                                        <span class="text-xs text-gray-400">2 days ago</span>
+                                    </div>
+                                    <p class="text-sm text-gray-300 mb-2">Celebrating outstanding contributors of Q1 2025. Nominate your peers!</p>
+                                    <button onclick="openModal('nominateModal')" class="text-sm text-green-400 hover:text-green-300 font-medium">Submit Nomination →</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6">
+                            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                                <i class="fas fa-bolt text-yellow-400"></i>
+                                Quick Actions
+                            </h3>
+                            <div class="space-y-3">
+                                <button onclick="showTab('events')" class="w-full text-left p-3 rounded-lg bg-slate-800 hover:bg-purple-500/20 border border-slate-700 hover:border-purple-500/50 transition flex items-center gap-3">
+                                    <i class="fas fa-calendar-plus text-purple-400"></i>
+                                    <span>Register for Event</span>
+                                </button>
+                                <button onclick="showTab('tasks')" class="w-full text-left p-3 rounded-lg bg-slate-800 hover:bg-blue-500/20 border border-slate-700 hover:border-blue-500/50 transition flex items-center gap-3">
+                                    <i class="fas fa-upload text-blue-400"></i>
+                                    <span>Submit Deliverable</span>
+                                </button>
+                                <button onclick="showTab('mentorship')" class="w-full text-left p-3 rounded-lg bg-slate-800 hover:bg-cyan-500/20 border border-slate-700 hover:border-cyan-500/50 transition flex items-center gap-3">
+                                    <i class="fas fa-calendar-check text-cyan-400"></i>
+                                    <span>Book Mentorship</span>
+                                </button>
+                                <button onclick="showTab('community')" class="w-full text-left p-3 rounded-lg bg-slate-800 hover:bg-green-500/20 border border-slate-700 hover:border-green-500/50 transition flex items-center gap-3">
+                                    <i class="fas fa-comment-alt text-green-400"></i>
+                                    <span>Start Discussion</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Graph -->
+                    <div class="glass-card rounded-xl p-6 mt-6">
+                        <h3 class="text-xl font-bold mb-4">Activity Overview</h3>
+                        <div class="chart-container">
+                            <canvas id="activityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events & Participation Hub -->
+                <div id="events" class="tab-content">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold gradient-text">Events & Participation Hub</h2>
+                        <div class="flex gap-2">
+                            <button onclick="filterEvents('all')" class="px-4 py-2 rounded-lg bg-purple-500 text-white text-sm">All</button>
+                            <button onclick="filterEvents('upcoming')" class="px-4 py-2 rounded-lg bg-slate-800 text-gray-300 hover:bg-purple-500/20 text-sm">Upcoming</button>
+                            <button onclick="filterEvents('past')" class="px-4 py-2 rounded-lg bg-slate-800 text-gray-300 hover:bg-purple-500/20 text-sm">Past</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Upcoming Events -->
+                        <div class="lg:col-span-2 space-y-4">
+                            <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                                <i class="fas fa-calendar-day text-purple-400"></i>
+                                Upcoming Events
+                            </h3>
+                            
+                            <div class="glass-card rounded-xl p-6 hover-glow border-l-4 border-purple-500">
+                                <div class="flex flex-col md:flex-row justify-between gap-4">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded">Workshop</span>
+                                            <span class="text-xs text-gray-400">Mar 20, 2025 • 2:00 PM</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-2">Introduction to IoT & Embedded Systems</h3>
+                                        <p class="text-gray-300 text-sm mb-3">Learn the fundamentals of Internet of Things and build your first smart device using Arduino and sensors.</p>
+                                        <div class="flex items-center gap-4 text-sm text-gray-400">
+                                            <span><i class="fas fa-map-marker-alt mr-1"></i> Lab 302, Block C</span>
+                                            <span><i class="fas fa-users mr-1"></i> 45/50 registered</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col justify-center gap-2">
+                                        <button onclick="registerEvent('iot-workshop')" class="px-6 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-white font-medium transition">
+                                            Register
+                                        </button>
+                                        <button onclick="addToCalendar('iot-workshop')" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-gray-300 text-sm transition">
+                                            <i class="fas fa-calendar-plus mr-1"></i> Add to Calendar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6 hover-glow border-l-4 border-blue-500">
+                                <div class="flex flex-col md:flex-row justify-between gap-4">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded">Hackathon</span>
+                                            <span class="text-xs text-gray-400">Mar 25-26, 2025 • 24 Hours</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-2">CodeStorm 2025 - AI for Social Good</h3>
+                                        <p class="text-gray-300 text-sm mb-3">24-hour hackathon focused on developing AI solutions for community problems. Prizes worth $5000!</p>
+                                        <div class="flex items-center gap-4 text-sm text-gray-400">
+                                            <span><i class="fas fa-laptop mr-1"></i> Online + Offline</span>
+                                            <span><i class="fas fa-users mr-1"></i> 120 teams registered</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col justify-center gap-2">
+                                        <button onclick="registerEvent('codestorm')" class="px-6 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white font-medium transition">
+                                            Register Team
+                                        </button>
+                                        <button onclick="viewDetails('codestorm')" class="px-6 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-gray-300 text-sm transition">
+                                            View Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6 hover-glow border-l-4 border-green-500">
+                                <div class="flex flex-col md:flex-row justify-between gap-4">
+                                    <div class="flex-1">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">Webinar</span>
+                                            <span class="text-xs text-gray-400">Mar 28, 2025 • 6:00 PM</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-2">Career Paths in Robotics Engineering</h3>
+                                        <p class="text-gray-300 text-sm mb-3">Industry experts from Boston Dynamics and Tesla share insights on robotics careers.</p>
+                                        <div class="flex items-center gap-4 text-sm text-gray-400">
+                                            <span><i class="fas fa-video mr-1"></i> Zoom Meeting</span>
+                                            <span><i class="fas fa-users mr-1"></i> 200+ registered</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col justify-center gap-2">
+                                        <button onclick="registerEvent('robotics-webinar')" class="px-6 py-2 bg-green-500 hover:bg-green-600 rounded-lg text-white font-medium transition">
+                                            Join Webinar
+                                        </button>
+                                        <span class="text-xs text-center text-gray-400">Link will be shared 1 hour before</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- My Participation -->
+                        <div class="glass-card rounded-xl p-6 h-fit">
+                            <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                                <i class="fas fa-chart-pie text-cyan-400"></i>
+                                My Participation
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="text-center">
+                                    <div class="text-4xl font-bold text-cyan-400 mb-1">24</div>
+                                    <div class="text-sm text-gray-400">Events Attended</div>
+                                </div>
+                                <div class="border-t border-gray-700 pt-4">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm">Workshops</span>
+                                        <span class="text-sm font-bold text-purple-400">12</span>
+                                    </div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm">Hackathons</span>
+                                        <span class="text-sm font-bold text-blue-400">4</span>
+                                    </div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-sm">Webinars</span>
+                                        <span class="text-sm font-bold text-green-400">8</span>
+                                    </div>
+                                </div>
+                                <button onclick="showTab('achievements')" class="w-full py-2 border border-cyan-500 text-cyan-400 rounded-lg hover:bg-cyan-500/10 transition">
+                                    View Certificates
+                                </button>
+                            </div>
+
+                            <div class="mt-6 pt-6 border-t border-gray-700">
+                                <h4 class="font-semibold mb-3">Assigned Roles</h4>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2 text-sm">
+                                        <i class="fas fa-user-shield text-purple-400"></i>
+                                        <span>Event Coordinator - CodeStorm</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 text-sm">
+                                        <i class="fas fa-camera text-blue-400"></i>
+                                        <span>Photography Lead - Tech Summit</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Past Events with Recordings -->
+                    <div class="glass-card rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-history text-gray-400"></i>
+                            Past Events & Recordings
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-slate-800 rounded-lg p-4 hover:bg-slate-700 transition cursor-pointer" onclick="playRecording('ml-basics')">
+                                <div class="aspect-video bg-slate-900 rounded-lg mb-3 flex items-center justify-center relative group">
+                                    <i class="fas fa-play-circle text-4xl text-purple-400 group-hover:scale-110 transition"></i>
+                                    <span class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 text-xs rounded">2:34:15</span>
+                                </div>
+                                <h4 class="font-semibold mb-1">ML Basics Workshop</h4>
+                                <p class="text-xs text-gray-400">Feb 15, 2025 • 89 views</p>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4 hover:bg-slate-700 transition cursor-pointer" onclick="playRecording('web-dev')">
+                                <div class="aspect-video bg-slate-900 rounded-lg mb-3 flex items-center justify-center relative group">
+                                    <i class="fas fa-play-circle text-4xl text-blue-400 group-hover:scale-110 transition"></i>
+                                    <span class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 text-xs rounded">1:45:30</span>
+                                </div>
+                                <h4 class="font-semibold mb-1">Full Stack Web Dev</h4>
+                                <p class="text-xs text-gray-400">Feb 10, 2025 • 156 views</p>
+                            </div>
+                            <div class="bg-slate-800 rounded-lg p-4 hover:bg-slate-700 transition cursor-pointer" onclick="playRecording('career-fair')">
+                                <div class="aspect-video bg-slate-900 rounded-lg mb-3 flex items-center justify-center relative group">
+                                    <i class="fas fa-play-circle text-4xl text-green-400 group-hover:scale-110 transition"></i>
+                                    <span class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 text-xs rounded">3:12:00</span>
+                                </div>
+                                <h4 class="font-semibold mb-1">Career Fair 2025</h4>
+                                <p class="text-xs text-gray-400">Jan 28, 2025 • 234 views</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning & Skill Development Hub -->
+                <div id="learning" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Learning & Skill Development</h2>
+                        <p class="text-gray-400">Track your progress and access curated learning resources</p>
+                    </div>
+
+                    <!-- Roadmaps -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openRoadmap('coding')">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-code text-2xl text-purple-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">Coding Mastery</h3>
+                            <p class="text-sm text-gray-400 mb-3">Python, C++, Java, Data Structures</p>
+                            <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                                <div class="bg-purple-500 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                            <p class="text-xs text-purple-400">65% Complete</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openRoadmap('ai')">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-brain text-2xl text-blue-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">AI & ML Track</h3>
+                            <p class="text-sm text-gray-400 mb-3">Machine Learning, Deep Learning, NLP</p>
+                            <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 40%"></div>
+                            </div>
+                            <p class="text-xs text-blue-400">40% Complete</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openRoadmap('research')">
+                            <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-flask text-2xl text-cyan-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">Research Methods</h3>
+                            <p class="text-sm text-gray-400 mb-3">Paper Writing, LaTeX, Methodology</p>
+                            <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                                <div class="bg-cyan-500 h-2 rounded-full" style="width: 25%"></div>
+                            </div>
+                            <p class="text-xs text-cyan-400">25% Complete</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openRoadmap('iot')">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-microchip text-2xl text-green-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">IoT & Embedded</h3>
+                            <p class="text-sm text-gray-400 mb-3">Arduino, Raspberry Pi, Sensors</p>
+                            <div class="w-full bg-slate-700 rounded-full h-2 mb-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                            <p class="text-xs text-green-400">80% Complete</p>
+                        </div>
+                    </div>
+
+                    <!-- Learning Flowchart -->
+                    <div class="glass-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-bold mb-6 text-center">Recommended Learning Path</h3>
+                        <div class="flex flex-col items-center">
+                            <div class="flex flex-wrap justify-center gap-4 mb-4">
+                                <div class="flowchart-node" onclick="showTopic('basics')">
+                                    <i class="fas fa-play text-2xl mb-2"></i>
+                                    <div class="font-bold">Basics</div>
+                                    <div class="text-xs opacity-80">Programming Fundamentals</div>
+                                </div>
+                                <i class="fas fa-arrow-right flowchart-arrow self-center hidden md:block"></i>
+                                <i class="fas fa-arrow-down flowchart-arrow md:hidden"></i>
+                                <div class="flowchart-node" onclick="showTopic('intermediate')">
+                                    <i class="fas fa-layer-group text-2xl mb-2"></i>
+                                    <div class="font-bold">Intermediate</div>
+                                    <div class="text-xs opacity-80">DSA & OOP</div>
+                                </div>
+                                <i class="fas fa-arrow-right flowchart-arrow self-center hidden md:block"></i>
+                                <i class="fas fa-arrow-down flowchart-arrow md:hidden"></i>
+                                <div class="flowchart-node" onclick="showTopic('advanced')">
+                                    <i class="fas fa-rocket text-2xl mb-2"></i>
+                                    <div class="font-bold">Advanced</div>
+                                    <div class="text-xs opacity-80">Specialization</div>
+                                </div>
+                            </div>
+                            <div class="text-center text-gray-400 text-sm mt-4">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Click on any node to explore resources
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Workshop Recordings -->
+                        <div class="lg:col-span-2 glass-card rounded-xl p-6">
+                            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                <i class="fas fa-video text-red-400"></i>
+                                Workshop Recordings
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-4 p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition cursor-pointer" onclick="playRecording('python-advanced')">
+                                    <div class="w-16 h-16 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-play text-purple-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold">Advanced Python Programming</h4>
+                                        <p class="text-sm text-gray-400">Decorators, Generators, Context Managers</p>
+                                        <div class="flex gap-2 mt-1">
+                                            <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-0.5 rounded">Python</span>
+                                            <span class="text-xs bg-slate-700 text-gray-400 px-2 py-0.5 rounded">2:15:00</span>
+                                        </div>
+                                    </div>
+                                    <button class="text-purple-400 hover:text-purple-300">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center gap-4 p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition cursor-pointer" onclick="playRecording('tensorflow')">
+                                    <div class="w-16 h-16 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-play text-blue-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold">TensorFlow 2.0 Workshop</h4>
+                                        <p class="text-sm text-gray-400">Building Neural Networks from Scratch</p>
+                                        <div class="flex gap-2 mt-1">
+                                            <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded">AI/ML</span>
+                                            <span class="text-xs bg-slate-700 text-gray-400 px-2 py-0.5 rounded">3:00:00</span>
+                                        </div>
+                                    </div>
+                                    <button class="text-blue-400 hover:text-blue-300">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center gap-4 p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition cursor-pointer" onclick="playRecording('latex')">
+                                    <div class="w-16 h-16 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-play text-cyan-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold">Research Paper Writing with LaTeX</h4>
+                                        <p class="text-sm text-gray-400">IEEE Format, Citations, Templates</p>
+                                        <div class="flex gap-2 mt-1">
+                                            <span class="text-xs bg-cyan-500/20 text-cyan-400 px-2 py-0.5 rounded">Research</span>
+                                            <span class="text-xs bg-slate-700 text-gray-400 px-2 py-0.5 rounded">1:45:00</span>
+                                        </div>
+                                    </div>
+                                    <button class="text-cyan-400 hover:text-cyan-300">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resources Sidebar -->
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3 flex items-center gap-2">
+                                    <i class="fas fa-file-pdf text-red-400"></i>
+                                    Study Materials
+                                </h3>
+                                <div class="space-y-2">
+                                    <a href="pythonclass2.pdf" onclick="downloadResource('python-notes')" class="flex items-center gap-2 p-2 rounded hover:bg-slate-800 transition text-sm">
+                                        <i class="fas fa-download text-gray-400"></i>
+                                        <span>Python Complete Notes.pdf</span>
+                                    </a>
+                                    <a href="DSAsheet.pdf" onclick="downloadResource('dsa-sheet')" class="flex items-center gap-2 p-2 rounded hover:bg-slate-800 transition text-sm">
+                                        <i class="fas fa-download text-gray-400"></i>
+                                        <span>DSA Cheat Sheet.pdf</span>
+                                    </a>
+                                    <a href="ieeeResearchPPR.pdf" onclick="downloadResource('ieee-template')" class="flex items-center gap-2 p-2 rounded hover:bg-slate-800 transition text-sm">
+                                        <i class="fas fa-download text-gray-400"></i>
+                                        <span>IEEE Paper Template.docx</span>
+                                    </a>
+                                    <a href="RESUMEGUIDE.pdf" onclick="downloadResource('interview-guide')" class="flex items-center gap-2 p-2 rounded hover:bg-slate-800 transition text-sm">
+                                        <i class="fas fa-download text-gray-400"></i>
+                                        <span>Resume Interview Guide.pdf</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3 flex items-center gap-2">
+                                    <i class="fas fa-external-link-alt text-green-400"></i>
+                                    Recommended Courses
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-slate-800 rounded-lg">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <h4 class="font-semibold text-sm">Coursera: ML Specialization</h4>
+                                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded">Free</span>
+                                        </div>
+                                        <p class="text-xs text-gray-400">Stanford University • 3 months</p>
+                                    </div>
+                                    <div class="p-3 bg-slate-800 rounded-lg">
+                                        <div class="flex justify-between items-start mb-1">
+                                            <h4 class="font-semibold text-sm">edX: Data Structures</h4>
+                                            <span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded">Free</span>
+                                        </div>
+                                        <p class="text-xs text-gray-400">Microsoft • 6 weeks</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements & Contribution Tracker -->
+                <div id="achievements" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Achievements & Contributions</h2>
+                        <p class="text-gray-400">Track your growth and impact within the community</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div class="glass-card rounded-xl p-6 text-center hover-glow">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-3xl">
+                                <i class="fas fa-trophy text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-yellow-400 mb-1">#12</h3>
+                            <p class="text-gray-400 text-sm">Global Ranking</p>
+                            <p class="text-xs text-gray-500 mt-2">Top 5% of all members</p>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 text-center hover-glow">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-400 to-blue-500 flex items-center justify-center text-3xl">
+                                <i class="fas fa-medal text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-purple-400 mb-1">15</h3>
+                            <p class="text-gray-400 text-sm">Badges Earned</p>
+                            <div class="flex justify-center gap-2 mt-3">
+                                <i class="fas fa-star text-yellow-400" title="Event Organizer"></i>
+                                <i class="fas fa-code text-blue-400" title="Code Master"></i>
+                                <i class="fas fa-heart text-red-400" title="Volunteer"></i>
+                                <i class="fas fa-lightbulb text-yellow-300" title="Innovator"></i>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 text-center hover-glow">
+                            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-400 to-cyan-500 flex items-center justify-center text-3xl">
+                                <i class="fas fa-clock text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-green-400 mb-1">48h</h3>
+                            <p class="text-gray-400 text-sm">Volunteer Hours</p>
+                            <p class="text-xs text-gray-500 mt-2">Goal: 50h this semester</p>
+                        </div>
+                    </div>
+
+                    <!-- Certificates -->
+                    <div class="glass-card rounded-xl p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold flex items-center gap-2">
+                                <i class="fas fa-certificate text-yellow-400"></i>
+                                Your Certificates
+                            </h3>
+                            <button onclick="downloadAllCertificates()" class="text-sm text-purple-400 hover:text-purple-300">
+                                Download All
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-purple-500/50 transition">
+                                <div class="aspect-[1.4/1] bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg mb-3 flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                                    <i class="fas fa-award text-6xl text-white relative z-10"></i>
+                                </div>
+                                <h4 class="font-semibold mb-1">IoT Workshop Completion</h4>
+                                <p class="text-xs text-gray-400 mb-3">Issued: Feb 15, 2025</p>
+                                <button onclick="downloadCertificate('iot-2025')" class="w-full py-2 bg-purple-500/20 text-purple-400 rounded hover:bg-purple-500/30 transition text-sm">
+                                    <i class="fas fa-download mr-1"></i> Download PDF
+                                </button>
+                            </div>
+
+                            <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-blue-500/50 transition">
+                                <div class="aspect-[1.4/1] bg-gradient-to-br from-blue-600 to-cyan-600 rounded-lg mb-3 flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                                    <i class="fas fa-code text-6xl text-white relative z-10"></i>
+                                </div>
+                                <h4 class="font-semibold mb-1">Hackathon Participant</h4>
+                                <p class="text-xs text-gray-400 mb-3">Issued: Jan 20, 2025</p>
+                                <button onclick="downloadCertificate('hackathon-2025')" class="w-full py-2 bg-blue-500/20 text-blue-400 rounded hover:bg-blue-500/30 transition text-sm">
+                                    <i class="fas fa-download mr-1"></i> Download PDF
+                                </button>
+                            </div>
+
+                            <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-green-500/50 transition">
+                                <div class="aspect-[1.4/1] bg-gradient-to-br from-green-600 to-teal-600 rounded-lg mb-3 flex items-center justify-center relative overflow-hidden">
+                                    <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                                    <i class="fas fa-hand-holding-heart text-6xl text-white relative z-10"></i>
+                                </div>
+                                <h4 class="font-semibold mb-1">Volunteer Excellence</h4>
+                                <p class="text-xs text-gray-400 mb-3">Issued: Dec 2023</p>
+                                <button onclick="downloadCertificate('volunteer-2023')" class="w-full py-2 bg-green-500/20 text-green-400 rounded hover:bg-green-500/30 transition text-sm">
+                                    <i class="fas fa-download mr-1"></i> Download PDF
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Charts -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="glass-card rounded-xl p-6">
+                            <h3 class="text-lg font-bold mb-4">Monthly Activity</h3>
+                            <div class="chart-container">
+                                <canvas id="monthlyChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="glass-card rounded-xl p-6">
+                            <h3 class="text-lg font-bold mb-4">Skills Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="skillsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunities & Projects Board -->
+                <div id="opportunities" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Opportunities & Projects</h2>
+                        <p class="text-gray-400">Discover ways to grow and contribute</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Main Opportunities -->
+                        <div class="lg:col-span-2 space-y-4">
+                            <!-- Volunteer Openings -->
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-hand-holding-heart text-red-400"></i>
+                                    Volunteer Openings
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-4 bg-slate-800 rounded-lg border border-slate-700 hover:border-purple-500/50 transition">
+                                        <div class="mb-3 md:mb-0">
+                                            <h4 class="font-semibold text-purple-400">Event Coordinator - Tech Summit 2025</h4>
+                                            <p class="text-sm text-gray-400 mt-1">Help organize our flagship annual event. Manage logistics, coordinate speakers.</p>
+                                            <div class="flex gap-2 mt-2">
+                                                <span class="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">Leadership</span>
+                                                <span class="text-xs bg-slate-700 text-gray-400 px-2 py-1 rounded">20h/week</span>
+                                            </div>
+                                        </div>
+                                        <button onclick="applyOpportunity('event-coordinator')" class="px-6 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-white transition">
+                                            Apply Now
+                                        </button>
+                                    </div>
+
+                                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-4 bg-slate-800 rounded-lg border border-slate-700 hover:border-blue-500/50 transition">
+                                        <div class="mb-3 md:mb-0">
+                                            <h4 class="font-semibold text-blue-400">Technical Content Writer</h4>
+                                            <p class="text-sm text-gray-400 mt-1">Create blog posts, documentation, and social media content about tech topics.</p>
+                                            <div class="flex gap-2 mt-2">
+                                                <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">Writing</span>
+                                                <span class="text-xs bg-slate-700 text-gray-400 px-2 py-1 rounded">5h/week</span>
+                                            </div>
+                                        </div>
+                                        <button onclick="applyOpportunity('content-writer')" class="px-6 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white transition">
+                                            Apply Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Active Projects -->
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-project-diagram text-cyan-400"></i>
+                                    Active Projects
+                                </h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-cyan-500/50 transition cursor-pointer" onclick="joinProject('smart-campus')">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <span class="px-2 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded">IoT</span>
+                                            <span class="text-xs text-gray-400">3 spots left</span>
+                                        </div>
+                                        <h4 class="font-semibold mb-2">Smart Campus Initiative</h4>
+                                        <p class="text-sm text-gray-400 mb-3">Building IoT sensors for campus energy monitoring.</p>
+                                        <div class="flex items-center gap-2">
+                                            <img src="img3.jpg" class="w-6 h-6 rounded-full border border-slate-600">
+                                            <img src="img2.jpg" class="w-6 h-6 rounded-full border border-slate-600 -ml-2">
+                                            <span class="text-xs text-gray-400 ml-1">+5 members</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-purple-500/50 transition cursor-pointer" onclick="joinProject('ai-research')">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <span class="px-2 py-1 bg-purple-500/20 text-purple-400 text-xs rounded">AI/ML</span>
+                                            <span class="text-xs text-gray-400">2 spots left</span>
+                                        </div>
+                                        <h4 class="font-semibold mb-2">Medical Image Analysis</h4>
+                                        <p class="text-sm text-gray-400 mb-3">Research project on detecting diseases using CNNs.</p>
+                                        <div class="flex items-center gap-2">
+                                            <img src="img2.jpg" class="w-6 h-6 rounded-full border border-slate-600">
+                                            <img src="img3.jpg" class="w-6 h-6 rounded-full border border-slate-600 -ml-2">
+                                            <span class="text-xs text-gray-400 ml-1">+3 members</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hackathons -->
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-laptop-code text-yellow-400"></i>
+                                    Upcoming Hackathons
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-4 p-4 bg-slate-800 rounded-lg">
+                                        <div class="w-16 h-16 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-trophy text-2xl text-yellow-400"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-semibold">Code For Change 2025</h4>
+                                            <p class="text-sm text-gray-400">Social impact coding challenge • $10,000 prize pool</p>
+                                            <div class="flex gap-2 mt-1">
+                                                <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded">Mar 30-31</span>
+                                                <span class="text-xs bg-slate-700 text-gray-400 px-2 py-0.5 rounded">Online</span>
+                                            </div>
+                                        </div>
+                                        <button onclick="registerHackathon('code-for-change')" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-lg text-slate-900 font-medium transition">
+                                            Register
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3 flex items-center gap-2">
+                                    <i class="fas fa-bell text-orange-400"></i>
+                                    Internship Alerts
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-slate-800 rounded-lg border-l-2 border-green-500">
+                                        <h4 class="font-semibold text-sm">Google Summer Intern</h4>
+                                        <p class="text-xs text-gray-400 mt-1">Software Engineering • Bangalore</p>
+                                        <button onclick="viewInternship('google')" class="text-xs text-green-400 mt-2 hover:underline">View Details →</button>
+                                    </div>
+                                    <div class="p-3 bg-slate-800 rounded-lg border-l-2 border-blue-500">
+                                        <h4 class="font-semibold text-sm">Microsoft Research</h4>
+                                        <p class="text-xs text-gray-400 mt-1">AI Research Intern • Hyderabad</p>
+                                        <button onclick="viewInternship('microsoft')" class="text-xs text-blue-400 mt-2 hover:underline">View Details →</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">My Applications</h3>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center p-2 bg-slate-800 rounded text-sm">
+                                        <span>Event Coordinator</span>
+                                        <span class="text-yellow-400 text-xs">Pending</span>
+                                    </div>
+                                    <div class="flex justify-between items-center p-2 bg-slate-800 rounded text-sm">
+                                        <span>Smart Campus</span>
+                                        <span class="text-green-400 text-xs">Accepted</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task & Event Coordination System -->
+                <div id="tasks" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Task & Event Coordination</h2>
+                        <p class="text-gray-400">Manage your responsibilities and track progress</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Task Board -->
+                        <div class="lg:col-span-2">
+                            <div class="glass-card rounded-xl p-6 mb-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-lg font-bold flex items-center gap-2">
+                                        <i class="fas fa-clipboard-list text-purple-400"></i>
+                                        My Task Board
+                                    </h3>
+                                    <button onclick="openModal('addTaskModal')" class="px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-sm transition">
+                                        <i class="fas fa-plus mr-1"></i> Add Task
+                                    </button>
+                                </div>
+                                
+                                <!-- Task Columns -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800/50 rounded-lg p-4">
+                                        <h4 class="font-semibold text-gray-400 mb-3 flex items-center gap-2">
+                                            <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                                            To Do (3)
+                                        </h4>
+                                        <div class="space-y-3" id="todo-tasks">
+                                            <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 cursor-move hover:border-yellow-500/50 transition" draggable="true">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <span class="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">High</span>
+                                                    <span class="text-xs text-gray-500">Due Tomorrow</span>
+                                                </div>
+                                                <h5 class="font-medium text-sm mb-2">Prepare Event Budget</h5>
+                                                <p class="text-xs text-gray-400 mb-3">Tech Summit 2025 financial planning</p>
+                                                <div class="flex justify-between items-center">
+                                                    <img src="img2.jpg" class="w-6 h-6 rounded-full">
+                                                    <button onclick="moveTask(this, 'progress')" class="text-xs text-yellow-400 hover:text-yellow-300">Start →</button>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 cursor-move hover:border-yellow-500/50 transition" draggable="true">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded">Medium</span>
+                                                    <span class="text-xs text-gray-500">Due Mar 20</span>
+                                                </div>
+                                                <h5 class="font-medium text-sm mb-2">Contact Speakers</h5>
+                                                <p class="text-xs text-gray-400 mb-3">Confirm 3 keynote speakers</p>
+                                                <div class="flex justify-between items-center">
+                                                    <img src="img5.jpg" class="w-6 h-6 rounded-full">
+                                                    <button onclick="moveTask(this, 'progress')" class="text-xs text-yellow-400 hover:text-yellow-300">Start →</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-800/50 rounded-lg p-4">
+                                        <h4 class="font-semibold text-gray-400 mb-3 flex items-center gap-2">
+                                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                                            In Progress (2)
+                                        </h4>
+                                        <div class="space-y-3" id="progress-tasks">
+                                            <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 cursor-move hover:border-blue-500/50 transition" draggable="true">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <span class="text-xs bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded">In Progress</span>
+                                                    <span class="text-xs text-gray-500">60% done</span>
+                                                </div>
+                                                <h5 class="font-medium text-sm mb-2">Venue Booking</h5>
+                                                <div class="w-full bg-slate-700 rounded-full h-1.5 mb-3">
+                                                    <div class="bg-blue-500 h-1.5 rounded-full" style="width: 60%"></div>
+                                                </div>
+                                                <div class="flex justify-between items-center">
+                                                    <img src="img3.jpg" class="w-6 h-6 rounded-full">
+                                                    <button onclick="moveTask(this, 'done')" class="text-xs text-blue-400 hover:text-blue-300">Complete →</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-800/50 rounded-lg p-4">
+                                        <h4 class="font-semibold text-gray-400 mb-3 flex items-center gap-2">
+                                            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                                            Completed (5)
+                                        </h4>
+                                        <div class="space-y-3" id="done-tasks">
+                                            <div class="bg-slate-800 p-3 rounded-lg border border-slate-700 opacity-60">
+                                                <div class="flex justify-between items-start mb-2">
+                                                    <span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded">Done</span>
+                                                    <i class="fas fa-check-circle text-green-400"></i>
+                                                </div>
+                                                <h5 class="font-medium text-sm mb-2 line-through">Team Meeting</h5>
+                                                <p class="text-xs text-gray-400">Completed on Mar 15</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event Logistics -->
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-truck text-cyan-400"></i>
+                                    Event Logistics Manager
+                                </h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4 text-center">
+                                        <i class="fas fa-map-marker-alt text-3xl text-red-400 mb-2"></i>
+                                        <h4 class="font-semibold mb-1">Venue</h4>
+                                        <p class="text-sm text-gray-400">Main Auditorium</p>
+                                        <button onclick="manageLogistics('venue')" class="mt-2 text-xs text-cyan-400 hover:underline">Manage</button>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4 text-center">
+                                        <i class="fas fa-microphone text-3xl text-purple-400 mb-2"></i>
+                                        <h4 class="font-semibold mb-1">Equipment</h4>
+                                        <p class="text-sm text-gray-400">8/10 items ready</p>
+                                        <button onclick="manageLogistics('equipment')" class="mt-2 text-xs text-cyan-400 hover:underline">Checklist</button>
+                                    </div>
+                                    <div class="bg-slate-800 rounded-lg p-4 text-center">
+                                        <i class="fas fa-users text-3xl text-green-400 mb-2"></i>
+                                        <h4 class="font-semibold mb-1">Volunteers</h4>
+                                        <p class="text-sm text-gray-400">12 assigned</p>
+                                        <button onclick="manageLogistics('volunteers')" class="mt-2 text-xs text-cyan-400 hover:underline">Assign</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3 flex items-center gap-2">
+                                    <i class="fas fa-clock text-orange-400"></i>
+                                    Deadline Reminders
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3 p-3 bg-red-500/10 border border-red-500/30 rounded-lg">
+                                        <i class="fas fa-exclamation-circle text-red-400"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Budget Submission</p>
+                                            <p class="text-xs text-gray-400">Due in 24 hours</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+                                        <i class="fas fa-clock text-yellow-400"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Speaker Confirmation</p>
+                                            <p class="text-xs text-gray-400">Due in 3 days</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">Quick Submit</h3>
+                                <div class="space-y-3">
+                                    <button onclick="openModal('submitDeliverableModal')" class="w-full p-3 bg-slate-800 rounded-lg text-left hover:bg-slate-700 transition flex items-center gap-3">
+                                        <i class="fas fa-file-upload text-purple-400"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Submit Deliverable</p>
+                                            <p class="text-xs text-gray-400">Upload files & documents</p>
+                                        </div>
+                                    </button>
+                                    <button onclick="markAttendance()" class="w-full p-3 bg-slate-800 rounded-lg text-left hover:bg-slate-700 transition flex items-center gap-3">
+                                        <i class="fas fa-clipboard-check text-green-400"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Mark Attendance</p>
+                                            <p class="text-xs text-gray-400">For today's event</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community & Communication Center -->
+                <div id="community" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Community & Communication</h2>
+                        <p class="text-gray-400">Connect, collaborate, and grow together</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Discussion Forums -->
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-lg font-bold flex items-center gap-2">
+                                        <i class="fas fa-comments text-blue-400"></i>
+                                        Discussion Forums
+                                    </h3>
+                                    <button onclick="openModal('newTopicModal')" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-sm transition">
+                                        <i class="fas fa-plus mr-1"></i> New Topic
+                                    </button>
+                                </div>
+                                
+                                <div class="space-y-3">
+                                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700 hover:border-blue-500/50 transition cursor-pointer" onclick="openThread('career-advice')">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-semibold text-blue-400">Career Advice for Freshers</h4>
+                                            <span class="text-xs text-gray-400">2 hours ago</span>
+                                        </div>
+                                        <p class="text-sm text-gray-300 mb-3">What skills should I focus on for campus placements in AI/ML companies?</p>
+                                        <div class="flex items-center gap-4 text-xs text-gray-400">
+                                            <span><i class="fas fa-user mr-1"></i> Priya Sharma</span>
+                                            <span><i class="fas fa-comment mr-1"></i> 24 replies</span>
+                                            <span><i class="fas fa-eye mr-1"></i> 156 views</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700 hover:border-purple-500/50 transition cursor-pointer" onclick="openThread('project-help')">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-semibold text-purple-400">Help with IoT Project</h4>
+                                            <span class="text-xs text-gray-400">5 hours ago</span>
+                                        </div>
+                                        <p class="text-sm text-gray-300 mb-3">Having trouble with ESP32 WiFi connection. Getting timeout errors.</p>
+                                        <div class="flex items-center gap-4 text-xs text-gray-400">
+                                            <span><i class="fas fa-user mr-1"></i> Rahul Kumar</span>
+                                            <span><i class="fas fa-comment mr-1"></i> 12 replies</span>
+                                            <span><i class="fas fa-eye mr-1"></i> 89 views</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-4 bg-slate-800 rounded-lg border border-slate-700 hover:border-green-500/50 transition cursor-pointer" onclick="openThread('study-group')">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="font-semibold text-green-400">DSA Study Group - Weekend</h4>
+                                            <span class="text-xs text-gray-400">1 day ago</span>
+                                        </div>
+                                        <p class="text-sm text-gray-300 mb-3">Forming a group to solve LeetCode problems every Saturday. Join us!</p>
+                                        <div class="flex items-center gap-4 text-xs text-gray-400">
+                                            <span><i class="fas fa-user mr-1"></i> Anamika Sharma</span>
+                                            <span><i class="fas fa-comment mr-1"></i> 8 replies</span>
+                                            <span><i class="fas fa-eye mr-1"></i> 234 views</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Polls -->
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-poll text-yellow-400"></i>
+                                    Active Polls
+                                </h3>
+                                <div class="bg-slate-800 rounded-lg p-4">
+                                    <h4 class="font-semibold mb-3">Which topic should we cover in next workshop?</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center gap-3">
+                                            <input type="radio" name="poll" id="option1" class="w-4 h-4 text-purple-500">
+                                            <label for="option1" class="flex-1 text-sm">Blockchain Development (45%)</label>
+                                            <div class="w-24 bg-slate-700 rounded-full h-2">
+                                                <div class="bg-purple-500 h-2 rounded-full" style="width: 45%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <input type="radio" name="poll" id="option2" class="w-4 h-4 text-blue-500">
+                                            <label for="option2" class="flex-1 text-sm">Cloud Computing (30%)</label>
+                                            <div class="w-24 bg-slate-700 rounded-full h-2">
+                                                <div class="bg-blue-500 h-2 rounded-full" style="width: 30%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <input type="radio" name="poll" id="option3" class="w-4 h-4 text-green-500">
+                                            <label for="option3" class="flex-1 text-sm">Cybersecurity (25%)</label>
+                                            <div class="w-24 bg-slate-700 rounded-full h-2">
+                                                <div class="bg-green-500 h-2 rounded-full" style="width: 25%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button onclick="submitVote()" class="mt-4 w-full py-2 bg-yellow-500 hover:bg-yellow-600 rounded-lg text-slate-900 font-medium transition">
+                                        Submit Vote
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3 flex items-center gap-2">
+                                    <i class="fas fa-broadcast-tower text-red-400"></i>
+                                    Group Broadcasts
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-slate-800 rounded-lg border-l-2 border-red-500">
+                                        <p class="text-sm font-medium text-red-400">Urgent</p>
+                                        <p class="text-xs text-gray-300 mt-1">Venue changed for tomorrow's workshop. Check email.</p>
+                                        <p class="text-xs text-gray-500 mt-2">Core Team • 10 min ago</p>
+                                    </div>
+                                    <div class="p-3 bg-slate-800 rounded-lg border-l-2 border-blue-500">
+                                        <p class="text-sm font-medium text-blue-400">Reminder</p>
+                                        <p class="text-xs text-gray-300 mt-1">Submit feedback forms by EOD.</p>
+                                        <p class="text-xs text-gray-500 mt-2">Volunteer Lead • 2 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">Idea Sharing</h3>
+                                <button onclick="openModal('shareIdeaModal')" class="w-full p-3 border-2 border-dashed border-slate-600 rounded-lg text-gray-400 hover:border-purple-500 hover:text-purple-400 transition">
+                                    <i class="fas fa-lightbulb mr-2"></i>
+                                    Share Your Idea
+                                </button>
+                                <div class="mt-4 space-y-2">
+                                    <div class="p-2 bg-slate-800 rounded text-sm">
+                                        <p class="font-medium text-purple-400">AI-powered Campus Navigator</p>
+                                        <p class="text-xs text-gray-400">By Sarah • 12 upvotes</p>
+                                    </div>
+                                    <div class="p-2 bg-slate-800 rounded text-sm">
+                                        <p class="font-medium text-blue-400">Recycling App for College</p>
+                                        <p class="text-xs text-gray-400">By Mike • 8 upvotes</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">Volunteer Chats</h3>
+                                <div class="space-y-2">
+                                    <button onclick="openChat('tech-summit')" class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-slate-800 transition text-left">
+                                        <div class="w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-users text-purple-400"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">Tech Summit Team</p>
+                                            <p class="text-xs text-gray-400">12 members • 3 new messages</p>
+                                        </div>
+                                    </button>
+                                    <button onclick="openChat('workshop-volunteers')" class="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-slate-800 transition text-left">
+                                        <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-wrench text-blue-400"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">Workshop Volunteers</p>
+                                            <p class="text-xs text-gray-400">8 members</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mentorship & Guidance Zone -->
+                <div id="mentorship" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Mentorship & Guidance</h2>
+                        <p class="text-gray-400">Connect with mentors and accelerate your growth</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Mentor Profiles -->
+                        <div class="lg:col-span-2">
+                            <div class="glass-card rounded-xl p-6 mb-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-user-tie text-purple-400"></i>
+                                    Available Mentors
+                                </h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-purple-500/50 transition">
+                                        <div class="flex items-start gap-4">
+                                            <img src="prof1.jpg" class="w-16 h-16 rounded-lg object-cover">
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-lg">Dr. Sarah Verma</h4>
+                                                <p class="text-sm text-purple-400 mb-1">AI/ML Research Lead</p>
+                                                <p class="text-xs text-gray-400 mb-3">15 years experience • PhD MIT • 50+ mentees</p>
+                                                <div class="flex flex-wrap gap-1 mb-3">
+                                                    <span class="text-xs bg-slate-700 px-2 py-0.5 rounded">Machine Learning</span>
+                                                    <span class="text-xs bg-slate-700 px-2 py-0.5 rounded">Research</span>
+                                                </div>
+                                                <button onclick="bookSession('sarah-chen')" class="w-full py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-sm transition">
+                                                    Book Session
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-blue-500/50 transition">
+                                        <div class="flex items-start gap-4">
+                                            <img src="prof2.jpg" class="w-16 h-16 rounded-lg object-cover">
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-lg">Prof. Jasmine Sharma</h4>
+                                                <p class="text-sm text-blue-400 mb-1">IoT & Embedded Systems</p>
+                                                <p class="text-xs text-gray-400 mb-3">20 years industry • Ex-Intel • Patent holder</p>
+                                                <div class="flex flex-wrap gap-1 mb-3">
+                                                    <span class="text-xs bg-slate-700 px-2 py-0.5 rounded">IoT</span>
+                                                    <span class="text-xs bg-slate-700 px-2 py-0.5 rounded">Hardware</span>
+                                                </div>
+                                                <button onclick="bookSession('james-wilson')" class="w-full py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-sm transition">
+                                                    Book Session
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-cyan-500/50 transition">
+                                        <div class="flex items-start gap-4">
+                                            <img src="prof3.jpeg" class="w-16 h-16 rounded-lg object-cover">
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-lg">Rashi Jain</h4>
+                                                <p class="text-sm text-cyan-400 mb-1">Software Engineer @ Google</p>
+                                                <p class="text-xs text-gray-400 mb-3">5 years FAANG • Interview expert • Career coach</p>
+                                                <div class="flex flex-wrap gap-1 mb-3">
+                                                    <span class="text-xs bg-slate-700 px-2 py-0.5 rounded">Career</span>
+                                                    <span class="text-xs bg-slate-700 px-2 py-0.5 rounded">Interviews</span>
+                                                </div>
+                                                <button onclick="bookSession('emily-rodriguez')" class="w-full py-2 bg-cyan-500 hover:bg-cyan-600 rounded-lg text-sm transition">
+                                                    Book Session
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-green-500/50 transition">
+                                        <div class="flex items-start gap-4">
+                                            <img src="prof4.jpg" class="w-16 h-16 rounded-lg object-cover">
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-lg">Manisha kataria</h4>
+                                                <p class="text-sm text-green-400 mb-1">Research Scientist</p>
+                                                <p class="text-xs text-gray-400 mb-3">Published 30+ papers • IEEE Senior Member</p>
+                                                <div class="flex flex-wrap gap-1 mb-3">
+                                                    <span class="text-xs bg-slate-700 px-2 py-0.5 rounded">Research</span>
+                                                    <span class="text-xs bg-slate-700 px-2 py-0.5 rounded">Academia</span>
+                                                </div>
+                                                <button onclick="bookSession('michael-chang')" class="w-full py-2 bg-green-500 hover:bg-green-600 rounded-lg text-sm transition">
+                                                    Book Session
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Alumni Network -->
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-graduation-cap text-yellow-400"></i>
+                                    Alumni Network
+                                </h3>
+                                <div class="flex items-center gap-4 p-4 bg-slate-800 rounded-lg">
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold mb-2">Connect with 500+ Alumni</h4>
+                                        <p class="text-sm text-gray-400 mb-3">Our graduates work at Google, Microsoft, Amazon, and top research universities worldwide.</p>
+                                        <button onclick="browseAlumni()" class="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-lg text-slate-900 font-medium transition">
+                                            Browse Directory
+                                        </button>
+                                    </div>
+                                    <div class="hidden md:flex -space-x-3">
+                                        <img src="img1'.jpg" class="w-10 h-10 rounded-full border-2 border-slate-800">
+                                        <img src="img3.jpg" class="w-10 h-10 rounded-full border-2 border-slate-800">
+                                        <img src="img2.jpg" class="w-10 h-10 rounded-full border-2 border-slate-800">
+                                        <div class="w-10 h-10 rounded-full border-2 border-slate-800 bg-slate-700 flex items-center justify-center text-xs">+497</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">My Sessions</h3>
+                                <div class="space-y-3">
+                                    <div class="p-3 bg-slate-800 rounded-lg border-l-2 border-green-500">
+                                        <p class="text-sm font-medium">Dr. Sarah Chen</p>
+                                        <p class="text-xs text-gray-400">Mar 22, 2025 • 3:00 PM</p>
+                                        <p class="text-xs text-green-400 mt-1">Confirmed</p>
+                                    </div>
+                                    <div class="p-3 bg-slate-800 rounded-lg border-l-2 border-yellow-500">
+                                        <p class="text-sm font-medium">Emily Rodriguez</p>
+                                        <p class="text-xs text-gray-400">Mar 25, 2025 • 5:00 PM</p>
+                                        <p class="text-xs text-yellow-400 mt-1">Pending</p>
+                                    </div>
+                                </div>
+                                <button onclick="showTab('mentorship')" class="w-full mt-4 py-2 border border-purple-500 text-purple-400 rounded-lg hover:bg-purple-500/10 transition text-sm">
+                                    View All Sessions
+                                </button>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">Career Guidance</h3>
+                                <div class="space-y-2">
+                                    <button onclick="requestGuidance('resume')" class="w-full text-left p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition flex items-center gap-3">
+                                        <i class="fas fa-file-alt text-purple-400"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Resume Review</p>
+                                            <p class="text-xs text-gray-400">Get expert feedback</p>
+                                        </div>
+                                    </button>
+                                    <button onclick="requestGuidance('mock-interview')" class="w-full text-left p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition flex items-center gap-3">
+                                        <i class="fas fa-user-tie text-blue-400"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Mock Interview</p>
+                                            <p class="text-xs text-gray-400">Practice with experts</p>
+                                        </div>
+                                    </button>
+                                    <button onclick="requestGuidance('career-path')" class="w-full text-left p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition flex items-center gap-3">
+                                        <i class="fas fa-route text-green-400"></i>
+                                        <div>
+                                            <p class="text-sm font-medium">Career Path Planning</p>
+                                            <p class="text-xs text-gray-400">Long term guidance</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resource & Document Library -->
+                <div id="resources" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Resource & Document Library</h2>
+                        <p class="text-gray-400">Access official templates, guides, and assets</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openResourceFolder('templates')">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-file-alt text-2xl text-purple-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">Event Templates</h3>
+                            <p class="text-sm text-gray-400 mb-3">Proposal formats, budget sheets, schedules</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span>24 files</span>
+                                <span>Updated yesterday</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openResourceFolder('reports')">
+                            <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-chart-bar text-2xl text-blue-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">Previous Reports</h3>
+                            <p class="text-sm text-gray-400 mb-3">Annual reports, event summaries, analytics</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span>56 files</span>
+                                <span>Updated weekly</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openResourceFolder('branding')">
+                            <div class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-palette text-2xl text-cyan-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">Branding Assets</h3>
+                            <p class="text-sm text-gray-400 mb-3">Logos, banners, posters, social media kits</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span>89 files</span>
+                                <span>Updated monthly</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openResourceFolder('presentations')">
+                            <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-presentation text-2xl text-green-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">Presentation Formats</h3>
+                            <p class="text-sm text-gray-400 mb-3">PPT templates, poster formats, demo slides</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span>15 files</span>
+                                <span>Updated 2 days ago</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openResourceFolder('policies')">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-gavel text-2xl text-yellow-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">IEEE Policies</h3>
+                            <p class="text-sm text-gray-400 mb-3">Code of conduct, guidelines, procedures</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span>12 files</span>
+                                <span>Updated quarterly</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-6 hover-glow cursor-pointer" onclick="openResourceFolder('proposals')">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center mb-4">
+                                <i class="fas fa-file-signature text-2xl text-red-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-2">Proposal Samples</h3>
+                            <p class="text-sm text-gray-400 mb-3">Successful funding proposals, project pitches</p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span>8 files</span>
+                                <span>Updated last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Uploads -->
+                    <div class="glass-card rounded-xl p-6 mt-6">
+                        <h3 class="text-lg font-bold mb-4">Recently Added</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-file-powerpoint text-orange-400 text-xl"></i>
+                                    <div>
+                                        <p class="font-medium">Tech_Summit_2025_Template.pptx</p>
+                                        <p class="text-xs text-gray-400">Added by Core Team • 2 hours ago</p>
+                                    </div>
+                                </div>
+                                <button onclick="downloadFile('tech-summit-template')" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm transition">
+                                    <i class="fas fa-download mr-1"></i> Download
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-file-excel text-green-400 text-xl"></i>
+                                    <div>
+                                        <p class="font-medium">Event_Budget_Template_2025.xlsx</p>
+                                        <p class="text-xs text-gray-400">Added by Finance Team • 1 day ago</p>
+                                    </div>
+                                </div>
+                                <button onclick="downloadFile('budget-template')" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm transition">
+                                    <i class="fas fa-download mr-1"></i> Download
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-file-pdf text-red-400 text-xl"></i>
+                                    <div>
+                                        <p class="font-medium">IEEE_Student_Branch_Handbook.pdf</p>
+                                        <p class="text-xs text-gray-400">Added by Advisor • 3 days ago</p>
+                                    </div>
+                                </div>
+                                <button onclick="downloadFile('handbook')" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm transition">
+                                    <i class="fas fa-download mr-1"></i> Download
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile & Portfolio Management -->
+                <div id="profile" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Profile & Portfolio</h2>
+                        <p class="text-gray-400">Manage your personal brand and professional presence</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Profile Card -->
+                        <div class="glass-card rounded-xl p-6 text-center">
+                            <div class="relative inline-block mb-4">
+                                <img src="img1.jpg" class="w-32 h-32 rounded-full border-4 border-purple-500 mx-auto">
+                                <button onclick="uploadPhoto()" class="absolute bottom-0 right-0 w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center hover:bg-purple-600 transition">
+                                    <i class="fas fa-camera text-white"></i>
+                                </button>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-1">Anamika Sharma</h3>
+                            <p class="text-purple-400 mb-2">Associate Member</p>
+                            <p class="text-sm text-gray-400 mb-4">Computer Science • Year 2 • IEEE Member since 2023</p>
+                            
+                            <div class="flex justify-center gap-3 mb-6">
+                                <a href="https://www.linkedin.com/company/ieee-igdtuw/" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-500 hover:text-white transition">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="https://github.com/IEEE-IGDTUW" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-gray-900 hover:text-white transition">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://x.com/ieeeigdtuw?t=a_Ruso2b8InVZgRsWA_JIQ&s=09" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-400 hover:text-white transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.instagram.com/ieeeigdtuw/?igshid=MzRlODBiNWFlZA%3D%3D" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-pink-500 hover:text-white transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+
+                            <button onclick="openModal('editProfileModal')" class="w-full py-2 border border-purple-500 text-purple-400 rounded-lg hover:bg-purple-500/10 transition">
+                                Edit Profile
+                            </button>
+                        </div>
+
+                        <!-- Details Form -->
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4">Personal Information</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-1">Full Name</label>
+                                        <input type="text" value="Alex Johnson" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-1">Email</label>
+                                        <input type="email" value="alex.johnson@university.edu" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-1">Student ID</label>
+                                        <input type="text" value="CS2022001" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-1">Branch</label>
+                                        <select class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                            <option>Computer Science</option>
+                                            <option>Electronics</option>
+                                            <option>Mechanical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4">Skills & Interests</h3>
+                                <div class="mb-4">
+                                    <label class="block text-sm text-gray-400 mb-2">Technical Skills</label>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm flex items-center gap-1">
+                                            Python <i class="fas fa-times cursor-pointer hover:text-red-400"></i>
+                                        </span>
+                                        <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm flex items-center gap-1">
+                                            Machine Learning <i class="fas fa-times cursor-pointer hover:text-red-400"></i>
+                                        </span>
+                                        <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm flex items-center gap-1">
+                                            IoT <i class="fas fa-times cursor-pointer hover:text-red-400"></i>
+                                        </span>
+                                        <button onclick="addSkill()" class="px-3 py-1 border border-dashed border-slate-600 text-gray-400 rounded-full text-sm hover:border-purple-500 hover:text-purple-400 transition">
+                                            <i class="fas fa-plus mr-1"></i> Add
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-400 mb-2">Areas of Interest</label>
+                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                        <label class="flex items-center gap-2 p-2 bg-slate-800 rounded cursor-pointer hover:bg-slate-700 transition">
+                                            <input type="checkbox" checked class="w-4 h-4 text-purple-500 rounded">
+                                            <span class="text-sm">AI/ML</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-2 bg-slate-800 rounded cursor-pointer hover:bg-slate-700 transition">
+                                            <input type="checkbox" checked class="w-4 h-4 text-purple-500 rounded">
+                                            <span class="text-sm">IoT</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-2 bg-slate-800 rounded cursor-pointer hover:bg-slate-700 transition">
+                                            <input type="checkbox" class="w-4 h-4 text-purple-500 rounded">
+                                            <span class="text-sm">Web Dev</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-2 bg-slate-800 rounded cursor-pointer hover:bg-slate-700 transition">
+                                            <input type="checkbox" class="w-4 h-4 text-purple-500 rounded">
+                                            <span class="text-sm">Robotics</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-2 bg-slate-800 rounded cursor-pointer hover:bg-slate-700 transition">
+                                            <input type="checkbox" checked class="w-4 h-4 text-purple-500 rounded">
+                                            <span class="text-sm">Research</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4">Portfolio & Links</h3>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-1">Resume/CV</label>
+                                        <div class="flex gap-2">
+                                            <input type="text" value="alex_johnson_resume.pdf" readonly class="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+                                            <button onclick="uploadResume()" class="px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg transition">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-1">Portfolio Website</label>
+                                        <input type="url" value="https://alexjohnson.dev" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-1">GitHub Profile</label>
+                                        <input type="url" value="https://github.com/alexjohnson" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-400 mb-1">LinkedIn Profile</label>
+                                        <input type="url" value="https://linkedin.com/in/alexjohnson" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end gap-3">
+                                <button onclick="resetProfile()" class="px-6 py-2 border border-slate-600 text-gray-400 rounded-lg hover:border-gray-400 hover:text-white transition">
+                                    Reset
+                                </button>
+                                <button onclick="saveProfile()" class="px-6 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-white transition">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feedback & Support System -->
+                <div id="feedback" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Feedback & Support</h2>
+                        <p class="text-gray-400">Help us improve and get assistance when needed</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Feedback Forms -->
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-comment-dots text-purple-400"></i>
+                                    Event Feedback
+                                </h3>
+                                <form onsubmit="submitFeedback(event)">
+                                    <div class="mb-4">
+                                        <label class="block text-sm text-gray-400 mb-2">Select Event</label>
+                                        <select class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                            <option>IoT Workshop - Mar 15, 2025</option>
+                                            <option>ML Basics Webinar - Mar 10, 2025</option>
+                                            <option>CodeStorm Hackathon - Feb 20-21, 2025</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-sm text-gray-400 mb-2">Rating</label>
+                                        <div class="flex gap-2 text-2xl text-gray-600">
+                                            <i class="fas fa-star hover:text-yellow-400 cursor-pointer transition" onclick="setRating(1)"></i>
+                                            <i class="fas fa-star hover:text-yellow-400 cursor-pointer transition" onclick="setRating(2)"></i>
+                                            <i class="fas fa-star hover:text-yellow-400 cursor-pointer transition" onclick="setRating(3)"></i>
+                                            <i class="fas fa-star hover:text-yellow-400 cursor-pointer transition" onclick="setRating(4)"></i>
+                                            <i class="fas fa-star hover:text-yellow-400 cursor-pointer transition" onclick="setRating(5)"></i>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-sm text-gray-400 mb-2">Your Feedback</label>
+                                        <textarea rows="4" placeholder="Share your experience, suggestions, or complaints..." class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none"></textarea>
+                                    </div>
+                                    <button type="submit" class="px-6 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-white transition">
+                                        Submit Feedback
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-ticket-alt text-cyan-400"></i>
+                                    Support Tickets
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="p-4 bg-slate-800 rounded-lg border-l-4 border-green-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div>
+                                                <h4 class="font-semibold">#1234 - Certificate Not Downloading</h4>
+                                                <p class="text-sm text-gray-400">Submitted: Mar 10, 2025</p>
+                                            </div>
+                                            <span class="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">Resolved</span>
+                                        </div>
+                                        <p class="text-sm text-gray-300">Issue with PDF generation for IoT workshop certificate.</p>
+                                        <div class="mt-3 p-2 bg-slate-900 rounded text-sm">
+                                            <p class="text-cyan-400">Support Team:</p>
+                                            <p class="text-gray-400">Fixed! You can now download your certificate.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-4 bg-slate-800 rounded-lg border-l-4 border-yellow-500">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div>
+                                                <h4 class="font-semibold">#1235 - Wrong Attendance Marked</h4>
+                                                <p class="text-sm text-gray-400">Submitted: Mar 14, 2025</p>
+                                            </div>
+                                            <span class="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs rounded">In Progress</span>
+                                        </div>
+                                        <p class="text-sm text-gray-300">I attended the workshop but was marked absent.</p>
+                                    </div>
+                                </div>
+                                <button onclick="openModal('newTicketModal')" class="mt-4 w-full py-2 border border-cyan-500 text-cyan-400 rounded-lg hover:bg-cyan-500/10 transition">
+                                    <i class="fas fa-plus mr-1"></i> Create New Ticket
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar -->
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3 flex items-center gap-2">
+                                    <i class="fas fa-lightbulb text-yellow-400"></i>
+                                    Anonymous Suggestions
+                                </h3>
+                                <p class="text-sm text-gray-400 mb-3">Share ideas without revealing your identity</p>
+                                <textarea rows="3" placeholder="Your suggestion..." class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm focus:border-purple-500 focus:outline-none mb-3"></textarea>
+                                <button onclick="submitAnonymous()" class="w-full py-2 bg-yellow-500 hover:bg-yellow-600 rounded-lg text-slate-900 font-medium transition">
+                                    Submit Anonymously
+                                </button>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">Quick Help</h3>
+                                <div class="space-y-2">
+                                    <button onclick="showFAQ()" class="w-full text-left p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition flex items-center gap-3">
+                                        <i class="fas fa-question-circle text-purple-400"></i>
+                                        <span class="text-sm">FAQs</span>
+                                    </button>
+                                    <button onclick="contactSupport()" class="w-full text-left p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition flex items-center gap-3">
+                                        <i class="fas fa-headset text-blue-400"></i>
+                                        <span class="text-sm">Contact Support</span>
+                                    </button>
+                                    <button onclick="reportIssue()" class="w-full text-left p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition flex items-center gap-3">
+                                        <i class="fas fa-bug text-red-400"></i>
+                                        <span class="text-sm">Report Bug</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6 bg-gradient-to-br from-purple-600/20 to-blue-600/20 border-purple-500/30">
+                                <h3 class="font-bold mb-2">We Value Your Input!</h3>
+                                <p class="text-sm text-gray-300 mb-3">Your feedback helps us create better experiences for all members.</p>
+                                <div class="flex items-center gap-2 text-sm text-purple-400">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>98% satisfaction rate</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account & Security Settings -->
+                <div id="security" class="tab-content">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold gradient-text mb-2">Account & Security</h2>
+                        <p class="text-gray-400">Keep your account safe and secure</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Security Settings -->
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-lock text-purple-400"></i>
+                                    Change Password
+                                </h3>
+                                <form onsubmit="changePassword(event)">
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-1">Current Password</label>
+                                            <input type="password" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-1">New Password</label>
+                                            <input type="password" id="newPassword" oninput="checkPasswordStrength()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                            <div class="mt-2 flex gap-1">
+                                                <div class="h-1 flex-1 bg-slate-700 rounded-full overflow-hidden">
+                                                    <div id="strength-bar" class="h-full bg-red-500 w-0 transition-all"></div>
+                                                </div>
+                                            </div>
+                                            <p id="strength-text" class="text-xs text-gray-400 mt-1">Password strength: Weak</p>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm text-gray-400 mb-1">Confirm New Password</label>
+                                            <input type="password" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white focus:border-purple-500 focus:outline-none">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="mt-4 px-6 py-2 bg-purple-500 hover:bg-purple-600 rounded-lg text-white transition">
+                                        Update Password
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-shield-alt text-green-400"></i>
+                                    Two-Factor Authentication
+                                </h3>
+                                <div class="flex items-center justify-between p-4 bg-slate-800 rounded-lg mb-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-mobile-alt text-green-400 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">Authenticator App</p>
+                                            <p class="text-sm text-gray-400">Google Authenticator</p>
+                                        </div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-slate-800 rounded-lg">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-envelope text-blue-400 text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-medium">Email Verification</p>
+                                            <p class="text-sm text-gray-400">anamika.johnson@university.edu</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-green-400 text-sm"><i class="fas fa-check-circle mr-1"></i> Verified</span>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <i class="fas fa-history text-blue-400"></i>
+                                    Login History
+                                </h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-laptop text-gray-400"></i>
+                                            <div>
+                                                <p class="text-sm font-medium">Windows PC - Chrome</p>
+                                                <p class="text-xs text-gray-400">IP: 192.168.1.1 • Current session</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-xs text-green-400">Active now</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-mobile-alt text-gray-400"></i>
+                                            <div>
+                                                <p class="text-sm font-medium">iPhone 13 - Safari</p>
+                                                <p class="text-xs text-gray-400">IP: 203.192.12.45 • Mar 15, 2025</p>
+                                            </div>
+                                        </div>
+                                        <button onclick="logoutDevice('iphone')" class="text-xs text-red-400 hover:text-red-300">Logout</button>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-slate-800 rounded-lg">
+                                        <div class="flex items-center gap-3">
+                                            <i class="fas fa-laptop text-gray-400"></i>
+                                            <div>
+                                                <p class="text-sm font-medium">MacBook - Firefox</p>
+                                                <p class="text-xs text-gray-400">IP: 203.192.12.50 • Mar 10, 2025</p>
+                                            </div>
+                                        </div>
+                                        <button onclick="logoutDevice('macbook')" class="text-xs text-red-400 hover:text-red-300">Logout</button>
+                                    </div>
+                                </div>
+                                <button onclick="logoutAllDevices()" class="mt-4 w-full py-2 border border-red-500 text-red-400 rounded-lg hover:bg-red-500/10 transition">
+                                    Logout from all devices
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Device Management -->
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">Security Status</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                                        <i class="fas fa-check-circle text-green-400 text-xl"></i>
+                                        <div>
+                                            <p class="text-sm font-medium text-green-400">Password Protected</p>
+                                            <p class="text-xs text-gray-400">Last changed 30 days ago</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
+                                        <i class="fas fa-check-circle text-green-400 text-xl"></i>
+                                        <div>
+                                            <p class="text-sm font-medium text-green-400">2FA Enabled</p>
+                                            <p class="text-xs text-gray-400">Extra layer active</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
+                                        <i class="fas fa-exclamation-triangle text-yellow-400 text-xl"></i>
+                                        <div>
+                                            <p class="text-sm font-medium text-yellow-400">Recovery Email</p>
+                                            <p class="text-xs text-gray-400">Not set up</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-6">
+                                <h3 class="font-bold mb-3">Danger Zone</h3>
+                                <div class="space-y-3">
+                                    <button onclick="deactivateAccount()" class="w-full p-3 border border-yellow-500/50 text-yellow-400 rounded-lg hover:bg-yellow-500/10 transition text-sm text-left">
+                                        <i class="fas fa-pause-circle mr-2"></i>
+                                        Deactivate Account
+                                    </button>
+                                    <button onclick="deleteAccount()" class="w-full p-3 border border-red-500/50 text-red-400 rounded-lg hover:bg-red-500/10 transition text-sm text-left">
+                                        <i class="fas fa-trash-alt mr-2"></i>
+                                        Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="nominateModal" class="modal">
+        <div class="glass-card rounded-xl p-6 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold mb-4">Nominate a Volunteer</h3>
+            <form onsubmit="submitNomination(event)">
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-1">Nominee Name</label>
+                    <input type="text" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-1">Reason for Nomination</label>
+                    <textarea rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white"></textarea>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button" onclick="closeModal('nominateModal')" class="px-4 py-2 text-gray-400 hover:text-white">Cancel</button>
+                    <button type="submit" class="px-6 py-2 bg-purple-500 rounded-lg text-white">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="addTaskModal" class="modal">
+        <div class="glass-card rounded-xl p-6 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold mb-4">Add New Task</h3>
+            <form onsubmit="addNewTask(event)">
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-1">Task Title</label>
+                    <input type="text" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-1">Priority</label>
+                    <select class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-1">Due Date</label>
+                    <input type="date" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button" onclick="closeModal('addTaskModal')" class="px-4 py-2 text-gray-400 hover:text-white">Cancel</button>
+                    <button type="submit" class="px-6 py-2 bg-purple-500 rounded-lg text-white">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="submitDeliverableModal" class="modal">
+        <div class="glass-card rounded-xl p-6 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold mb-4">Submit Deliverable</h3>
+            <form onsubmit="submitDeliverable(event)">
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-1">Task</label>
+                    <select class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white">
+                        <option>Event Budget Report</option>
+                        <option>Speaker Confirmation</option>
+                        <option>Venue Booking Proof</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-1">Upload File</label>
+                    <div class="border-2 border-dashed border-slate-700 rounded-lg p-6 text-center hover:border-purple-500/50 transition cursor-pointer">
+                        <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                        <p class="text-sm text-gray-400">Click to upload or drag and drop</p>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm text-gray-400 mb-1">Comments</label>
+                    <textarea rows="2" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-white"></textarea>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button type="button" onclick="closeModal('submitDeliverableModal')" class="px-4 py-2 text-gray-400 hover:text-white">Cancel</button>
+                    <button type="submit" class="px-6 py-2 bg-purple-500 rounded-lg text-white">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Dyslexia Mode Toggle - Comprehensive
+        function toggleDyslexiaMode() {
+            document.body.classList.toggle('dyslexia-mode');
+            const btn = document.querySelector('.dyslexia-toggle');
+            const text = document.getElementById('dyslexia-text');
+            const icon = btn.querySelector('i');
+            
+            if (document.body.classList.contains('dyslexia-mode')) {
+                text.textContent = 'Standard Mode';
+                icon.className = 'fas fa-eye';
+                btn.style.background = '#2C3E50';
+                // Update charts for better contrast
+                updateChartsForDyslexia();
+                // Show confirmation
+                showToast('Dyslexia-friendly mode enabled');
+            } else {
+                text.textContent = 'Dyslexia Mode';
+                icon.className = 'fas fa-brain';
+                btn.style.background = '';
+                resetCharts();
+                showToast('Standard mode restored');
+            }
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-4 right-4 bg-purple-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Tab Navigation
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Update page title
+            const titles = {
+                'home': 'Home Overview',
+                'events': 'Events & Participation',
+                'learning': 'Learning Hub',
+                'achievements': 'Achievements & Contributions',
+                'opportunities': 'Opportunities & Projects',
+                'tasks': 'Task Coordination',
+                'community': 'Community & Communication',
+                'mentorship': 'Mentorship & Guidance',
+                'resources': 'Resource Library',
+                'profile': 'Profile & Portfolio',
+                'feedback': 'Feedback & Support',
+                'security': 'Account & Security'
+            };
+            document.getElementById('page-title').textContent = titles[tabName];
+            
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.closest('.sidebar-link')?.classList.add('active');
+            
+            // Initialize charts if needed
+            if (tabName === 'home') initActivityChart();
+            if (tabName === 'achievements') initAchievementCharts();
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Chart Initialization
+        let activityChart, monthlyChart, skillsChart;
+
+        function initActivityChart() {
+            const ctx = document.getElementById('activityChart');
+            if (!ctx || activityChart) return;
+            
+            activityChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Events Attended',
+                        data: [4, 6, 8, 5, 7, 9],
+                        borderColor: '#8B5CF6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Volunteer Hours',
+                        data: [8, 12, 16, 10, 14, 18],
+                        borderColor: '#06B6D4',
+                        backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#E2E8F0' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: '#334155' }
+                        },
+                        x: {
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: '#334155' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initAchievementCharts() {
+            const ctx1 = document.getElementById('monthlyChart');
+            const ctx2 = document.getElementById('skillsChart');
+            
+            if (ctx1 && !monthlyChart) {
+                monthlyChart = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Workshops', 'Hackathons', 'Webinars', 'Volunteering', 'Projects'],
+                        datasets: [{
+                            label: 'Activities',
+                            data: [12, 4, 8, 15, 3],
+                            backgroundColor: [
+                                '#8B5CF6',
+                                '#3B82F6',
+                                '#06B6D4',
+                                '#10B981',
+                                '#F59E0B'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                ticks: { color: '#94A3B8' },
+                                grid: { color: '#334155' }
+                            },
+                            x: {
+                                ticks: { color: '#94A3B8' },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            if (ctx2 && !skillsChart) {
+                skillsChart = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Coding', 'AI/ML', 'IoT', 'Leadership', 'Communication'],
+                        datasets: [{
+                            data: [85, 70, 60, 75, 80],
+                            backgroundColor: [
+                                '#8B5CF6',
+                                '#3B82F6',
+                                '#06B6D4',
+                                '#10B981',
+                                '#F59E0B'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: { color: '#E2E8F0' }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function updateChartsForDyslexia() {
+            // Update chart colors for better contrast in dyslexia mode
+            if (activityChart) {
+                activityChart.options.scales.x.ticks.color = '#2C3E50';
+                activityChart.options.scales.y.ticks.color = '#2C3E50';
+                activityChart.options.scales.x.grid.color = '#BDC3C7';
+                activityChart.options.scales.y.grid.color = '#BDC3C7';
+                activityChart.options.plugins.legend.labels.color = '#2C3E50';
+                activityChart.update();
+            }
+            if (monthlyChart) {
+                monthlyChart.options.scales.x.ticks.color = '#2C3E50';
+                monthlyChart.options.scales.y.ticks.color = '#2C3E50';
+                monthlyChart.options.scales.x.grid.color = '#BDC3C7';
+                monthlyChart.options.scales.y.grid.color = '#BDC3C7';
+                monthlyChart.update();
+            }
+            if (skillsChart) {
+                skillsChart.options.plugins.legend.labels.color = '#2C3E50';
+                skillsChart.update();
+            }
+        }
+
+        function resetCharts() {
+            if (activityChart) {
+                activityChart.options.scales.x.ticks.color = '#94A3B8';
+                activityChart.options.scales.y.ticks.color = '#94A3B8';
+                activityChart.options.scales.x.grid.color = '#334155';
+                activityChart.options.scales.y.grid.color = '#334155';
+                activityChart.options.plugins.legend.labels.color = '#E2E8F0';
+                activityChart.update();
+            }
+            if (monthlyChart) {
+                monthlyChart.options.scales.x.ticks.color = '#94A3B8';
+                monthlyChart.options.scales.y.ticks.color = '#94A3B8';
+                monthlyChart.options.scales.x.grid.color = '#334155';
+                monthlyChart.options.scales.y.grid.color = '#334155';
+                monthlyChart.update();
+            }
+            if (skillsChart) {
+                skillsChart.options.plugins.legend.labels.color = '#E2E8F0';
+                skillsChart.update();
+            }
+        }
+
+        // Action Functions
+        function registerEvent(eventId) {
+            showToast('Registered successfully for event!');
+        }
+
+        function addToCalendar(eventId) {
+            showToast('Added to calendar');
+        }
+
+        function viewDetails(eventId) {
+            showToast('Opening details...');
+        }
+
+        function playRecording(recordingId) {
+            showToast('Playing recording...');
+        }
+
+        function downloadResource(resourceId) {
+            showToast('Downloading resource...');
+        }
+
+        function openRoadmap(roadmapId) {
+            showToast('Opening roadmap: ' + roadmapId);
+        }
+
+        function showTopic(topic) {
+            showToast('Showing resources for: ' + topic);
+        }
+
+        function downloadCertificate(certId) {
+            showToast('Downloading certificate...');
+        }
+
+        function downloadAllCertificates() {
+            showToast('Preparing download for all certificates...');
+        }
+
+        function applyOpportunity(oppId) {
+            showToast('Application submitted!');
+        }
+
+        function joinProject(projectId) {
+            showToast('Request sent to join project!');
+        }
+
+        function registerHackathon(hackId) {
+            showToast('Registered for hackathon!');
+        }
+
+        function viewInternship(internId) {
+            showToast('Viewing internship details...');
+        }
+
+        function moveTask(btn, target) {
+            showToast('Task moved to: ' + target);
+        }
+
+        function manageLogistics(type) {
+            showToast('Managing logistics: ' + type);
+        }
+
+        function markAttendance() {
+            showToast('Attendance marked for today!');
+        }
+
+        function openThread(threadId) {
+            showToast('Opening discussion thread...');
+        }
+
+        function submitVote() {
+            showToast('Vote submitted successfully!');
+        }
+
+        function openChat(chatId) {
+            showToast('Opening chat...');
+        }
+
+        function bookSession(mentorId) {
+            showToast('Session booking request sent!');
+        }
+
+        function browseAlumni() {
+            showToast('Opening alumni directory...');
+        }
+
+        function requestGuidance(type) {
+            showToast('Request submitted: ' + type);
+        }
+
+        function openResourceFolder(folderId) {
+            showToast('Opening folder: ' + folderId);
+        }
+
+        function downloadFile(fileId) {
+            showToast('Downloading file...');
+        }
+
+        function uploadPhoto() {
+            showToast('Photo upload dialog opened');
+        }
+
+        function addSkill() {
+            const skill = prompt('Enter new skill:');
+            if (skill) showToast('Added skill: ' + skill);
+        }
+
+        function uploadResume() {
+            showToast('Resume upload dialog opened');
+        }
+
+        function saveProfile() {
+            showToast('Profile saved successfully!');
+        }
+
+        function resetProfile() {
+            if (confirm('Reset all changes?')) {
+                showToast('Profile reset');
+            }
+        }
+
+        function submitFeedback(event) {
+            event.preventDefault();
+            showToast('Thank you for your feedback!');
+            event.target.reset();
+        }
+
+        function setRating(rating) {
+            const stars = document.querySelectorAll('.fa-star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('text-yellow-400');
+                    star.classList.remove('text-gray-600');
+                } else {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-600');
+                }
+            });
+        }
+
+        function submitAnonymous() {
+            showToast('Anonymous suggestion submitted. Thank you!');
+        }
+
+        function showFAQ() {
+            showToast('Opening FAQs...');
+        }
+
+        function contactSupport() {
+            showToast('Opening support chat...');
+        }
+
+        function reportIssue() {
+            showToast('Opening bug report form...');
+        }
+
+        function changePassword(event) {
+            event.preventDefault();
+            showToast('Password updated successfully!');
+            event.target.reset();
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('newPassword').value;
+            const bar = document.getElementById('strength-bar');
+            const text = document.getElementById('strength-text');
+            
+            let strength = 0;
+            if (password.length > 6) strength++;
+            if (password.length > 10) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            const colors = ['bg-red-500', 'bg-orange-500', 'bg-yellow-500', 'bg-blue-500', 'bg-green-500'];
+            const texts = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+            
+            bar.className = `h-full transition-all ${colors[strength] || 'bg-red-500'}`;
+            bar.style.width = `${(strength + 1) * 20}%`;
+            text.textContent = `Password strength: ${texts[strength] || 'Very Weak'}`;
+        }
+
+        function logoutDevice(device) {
+            if (confirm(`Logout from ${device}?`)) {
+                showToast(`Logged out from ${device}`);
+            }
+        }
+
+        function logoutAllDevices() {
+            if (confirm('Logout from all devices? You will need to login again.')) {
+                showToast('Logged out from all devices');
+            }
+        }
+
+        function deactivateAccount() {
+            if (confirm('Are you sure you want to deactivate your account?')) {
+                showToast('Account deactivation request submitted');
+            }
+        }
+
+        function deleteAccount() {
+            if (confirm('WARNING: This will permanently delete your account and all data. This action cannot be undone. Continue?')) {
+                showToast('Account deletion request submitted');
+            }
+        }
+
+        function submitNomination(event) {
+            event.preventDefault();
+            showToast('Nomination submitted successfully!');
+            closeModal('nominateModal');
+        }
+
+        function addNewTask(event) {
+            event.preventDefault();
+            showToast('Task added successfully!');
+            closeModal('addTaskModal');
+        }
+
+        function submitDeliverable(event) {
+            event.preventDefault();
+            showToast('Deliverable submitted successfully!');
+            closeModal('submitDeliverableModal');
+        }
+
+        function filterEvents(filter) {
+            showToast('Filtering events: ' + filter);
+        }
+
+        function showNotifications() {
+            showToast('You have 3 new notifications');
+        }
+
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('aside');
+            sidebar.classList.toggle('hidden');
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            initActivityChart();
+        });
+    </script>
+</body>
+</html>
